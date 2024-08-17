@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+service UserService {
+  rpc SayHello (HelloRequest) returns (HelloReply);
+  rpc Create (UserRequest) returns (User);
+  rpc FindAll (Empty) returns (UsersList);  // Return UsersList instead of stream
+  rpc FindOne (Query) returns (User);
+}
+
+message HelloRequest {
+  string name = 1;
+}
+
+message HelloReply {
+  string message = 1;
+}
+
+message UserRequest {
+  string name = 1;
+  string email = 2;
+}
+
+message User {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+}
+
+message Query {
+  string id = 1;
+}
+
+message Empty {}
+
+message UsersList {
+  repeated User users = 1;  // Array of User objects
+}
